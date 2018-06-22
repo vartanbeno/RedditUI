@@ -19,4 +19,25 @@ app.get("/", function(req, res) {
     console.log("test");
 })
 
+app.get("/hot/:subreddit", function(req, res) {
+    let hotPosts = reddit.getSubreddit(req.params.subreddit).getHot({limit: 10})
+    hotPosts.then(hot => {
+            hot.forEach((post, index, posts) => {
+                if (post.stickied) {
+                    posts[index].title = "[STICKIED] - " + post.title;
+                }
+            })
+        })
+        .then(() => {
+            res.render("index", {hotPosts: hotPosts});
+        })
+})
+
+app.get("/top/:subreddit", function(req, res) {
+    let hotPosts = reddit.getSubreddit(req.params.subreddit).getTop({limit: 10, time: "all"})
+    hotPosts.then(() => {
+            res.render("index", {hotPosts: hotPosts});
+        })
+})
+
 app.listen(port);
