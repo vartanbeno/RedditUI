@@ -1,6 +1,9 @@
 var express = require("express");
 var app = express();
 var snoowrap = require("snoowrap");
+var bodyParser = require("body-parser")
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var port = process.env.PORT || 3000;
 
@@ -16,11 +19,24 @@ app.set("view engine", "ejs");
 app.use("/assets", express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
-    res.render("index");
+    res.render("index", {qs: req.query});
+})
+
+// app.post("/", urlencodedParser, function(req, res) {
+//     console.log(req.body);
+//     res.render("search-success", {data: req.body})
+// })
+
+app.post("/", urlencodedParser, function(req, res) {
+    console.log(req.body);
+    let posts = reddit.getSubreddit(req.body.subreddit).getTop({limit: 10, time: req.body.time});
+    posts.then(() => {
+        res.render("posts", {data: req.body, redditPosts: posts})
+    })
 })
 
 app.get("/hot/:subreddit", function(req, res) {
-    let hotPosts = reddit.getSubreddit(req.params.subreddit).getHot({limit: 10})
+    let hotPosts = reddit.getSubreddit(req.params.subreddit).getHot({limit: 10});
     hotPosts.then(hot => {
             hot.forEach((post, index, posts) => {
                 if (post.stickied) {

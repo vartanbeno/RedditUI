@@ -4,6 +4,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
     </head>
     <body ng-controller="MainController as vm">
+        <p>You are currently vieweing the top /r/<%= data.subreddit %> posts
+            <% if (data.time == "all") { %>
+                of all time.
+            <% } else { %>
+                from the past <%= data.time %>.
+            <% } %>
+        </p>
         <ol>
             <li ng-repeat="post in vm.redditPosts.fulfillmentValue">{{post.title}}</li>
         </ol>

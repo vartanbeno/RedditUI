@@ -3,9 +3,9 @@
         <title>snoowrap</title>
     </head>
     <body>
-        <form method="GET" action="/top/">
-            <input type="text" name="subreddit" />
-            <select>
+        <form method="POST" action="/">
+            <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" />
+            <select id="time" name="time">
                 <option value="all">all</option>
                 <option value="year">year</option>
                 <option value="month">month</option>
