@@ -16,7 +16,7 @@ app.set("view engine", "ejs");
 app.use("/assets", express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
-    console.log("test");
+    res.render("index");
 })
 
 app.get("/hot/:subreddit", function(req, res) {
@@ -29,14 +29,15 @@ app.get("/hot/:subreddit", function(req, res) {
             })
         })
         .then(() => {
-            res.render("index", {hotPosts: hotPosts});
+            res.render("posts", {redditPosts: hotPosts});
         })
 })
 
-app.get("/top/:subreddit", function(req, res) {
-    let hotPosts = reddit.getSubreddit(req.params.subreddit).getTop({limit: 10, time: "all"})
-    hotPosts.then(() => {
-            res.render("index", {hotPosts: hotPosts});
+app.get("/top/:subreddit/:time?", function(req, res) {
+    let time = req.params.time || "all";
+    let topPosts = reddit.getSubreddit(req.params.subreddit).getTop({limit: 10, time: time});
+    topPosts.then(() => {
+            res.render("posts", {redditPosts: topPosts});
         })
 })
 

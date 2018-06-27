@@ -1,15 +1,19 @@
-<html ng-app="TestApp">
+<html>
     <head>
         <title>snoowrap</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
     </head>
-    <body ng-controller="MainController as vm">
-        <ol>
-            <li ng-repeat="post in vm.hotPosts.fulfillmentValue">{{post.title}}</li>
-        </ol>
-        <script>
-            var hotPosts = <%- JSON.stringify(hotPosts) %>;
-        </script>
-        <script src="/assets/js/app.js"></script>
+    <body>
+        <form method="GET" action="/top/">
+            <input type="text" name="subreddit" />
+            <select>
+                <option value="all">all</option>
+                <option value="year">year</option>
+                <option value="month">month</option>
+                <option value="week">week</option>
+                <option value="day">day</option>
+                <option value="hour">hour</option>
+            </select>
+            <input type="submit" />
+        </form>
     </body>
 </html>
