@@ -1,10 +1,11 @@
 <html ng-app="TestApp">
     <head>
-        <title>snoowrap</title>
+        <link href="/assets/style.css" type="text/css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
+        <title>snoowrap</title>
     </head>
     <body ng-controller="MainController as vm">
-        <p>You are currently vieweing the top /r/<%= data.subreddit %> posts
+        <p id="intro">You are currently viewing the top /r/<%= data.subreddit %> posts
             <% if (data.time == "all") { %>
                 of all time.
             <% } else { %>
@@ -12,7 +13,7 @@
             <% } %>
         </p>
         <ol>
-            <li ng-repeat="post in vm.redditPosts.fulfillmentValue">{{post.title}}</li>
+            <li ng-repeat="post in vm.redditPosts.fulfillmentValue">+{{post.ups}}. {{post.title}}<br/> Posted by {{post.author}}.</li>
         </ol>
         <script>
             var redditPosts = <%- JSON.stringify(redditPosts) %>;
