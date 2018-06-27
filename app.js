@@ -22,19 +22,6 @@ app.get("/", function(req, res) {
     res.render("index", {qs: req.query});
 })
 
-// app.post("/", urlencodedParser, function(req, res) {
-//     console.log(req.body);
-//     res.render("search-success", {data: req.body})
-// })
-
-app.post("/", urlencodedParser, function(req, res) {
-    console.log(req.body);
-    let posts = reddit.getSubreddit(req.body.subreddit).getTop({limit: 10, time: req.body.time});
-    posts.then(() => {
-        res.render("posts", {data: req.body, redditPosts: posts})
-    })
-})
-
 app.get("/hot/:subreddit", function(req, res) {
     let hotPosts = reddit.getSubreddit(req.params.subreddit).getHot({limit: 10});
     hotPosts.then(hot => {
@@ -55,6 +42,13 @@ app.get("/top/:subreddit/:time?", function(req, res) {
     topPosts.then(() => {
             res.render("posts", {redditPosts: topPosts});
         })
+})
+
+app.get("/results", function(req, res) {
+    let posts = reddit.getSubreddit(req.query.subreddit).getTop({limit: parseInt(req.query.number), time: req.query.time});
+    posts.then(() => {
+        res.render("posts", {qs: req.query, redditPosts: posts})
+    })
 })
 
 app.listen(port);

@@ -5,15 +5,15 @@
         <title>snoowrap</title>
     </head>
     <body ng-controller="MainController as vm">
-        <p id="intro">You are currently viewing the top /r/<%= data.subreddit %> posts
-            <% if (data.time == "all") { %>
+        <p id="intro">You are currently viewing the top /r/<%= qs.subreddit %> posts
+            <% if (qs.time == "all") { %>
                 of all time.
             <% } else { %>
-                from the past <%= data.time %>.
+                from the past <%= qs.time %>.
             <% } %>
         </p>
         <ol>
-            <li ng-repeat="post in vm.redditPosts.fulfillmentValue">+{{post.ups}}. {{post.title}}<br/> Posted by {{post.author}}.</li>
+            <li class="listitem" ng-repeat="post in vm.redditPosts.fulfillmentValue">+{{post.ups}}. {{post.title}}<br/> Posted by {{post.author}}.</li>
         </ol>
         <script>
             var redditPosts = <%- JSON.stringify(redditPosts) %>;
