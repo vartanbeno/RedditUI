@@ -1,8 +1,9 @@
 var express = require("express");
 var app = express();
 var snoowrap = require("snoowrap");
-var bodyParser = require("body-parser")
+var bodyParser = require("body-parser");
 
+const timespan = ['all', 'year', 'month', 'week', 'day', 'hour'];
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var port = process.env.PORT || 3000;
@@ -19,7 +20,7 @@ app.set("view engine", "ejs");
 app.use("/assets", express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
-    res.render("index", {qs: req.query});
+    res.render("index", {qs: req.query, timespan: timespan});
 })
 
 app.get("/hot/:subreddit", function(req, res) {

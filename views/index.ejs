@@ -1,8 +1,10 @@
-<html>
+<html ng-app="TestApp">
     <head>
+        <link href="/assets/style.css" type="text/css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
         <title>snoowrap</title>
     </head>
-    <body>
+    <body ng-controller="MainController as vm">
         <form method="GET" action="/results">
             <label for="subreddit">What subreddit would you like to look at?</label>
             <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" />
@@ -10,12 +12,7 @@
 
             <label for="time">Select a timespan.</label>
             <select id="time" name="time">
-                <option value="all">all</option>
-                <option value="year">year</option>
-                <option value="month">month</option>
-                <option value="week">week</option>
-                <option value="day">day</option>
-                <option value="hour">hour</option>
+                <option ng-repeat="time in vm.timespan" value="{{time}}">{{time}}</option>
             </select>
             <br/>
 
@@ -25,5 +22,9 @@
             
             <input type="submit" />
         </form>
+        <script>
+            var timespan = <%- JSON.stringify(timespan) %>;
+        </script>
+        <script src="/assets/js/app.js"></script>
     </body>
 </html>

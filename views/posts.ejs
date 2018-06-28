@@ -4,7 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
         <title>snoowrap</title>
     </head>
-    <body ng-controller="MainController as vm">
+    <body ng-controller="PostController as vm">
         <p id="intro">You are currently viewing the top /r/<%= qs.subreddit %> posts
             <% if (qs.time == "all") { %>
                 of all time.
@@ -13,7 +13,9 @@
             <% } %>
         </p>
         <ol>
-            <li class="listitem" ng-repeat="post in vm.redditPosts.fulfillmentValue">+{{post.ups}}. {{post.title}}<br/> Posted by {{post.author}}.</li>
+            <li class="listitem" ng-repeat="post in vm.redditPosts.fulfillmentValue">+{{post.ups}}. <a href="https://old.reddit.com{{post.permalink}}?sort=top" target="_blank">{{post.title}}</a>
+            <br/>
+            Posted by {{post.author}}.</li>
         </ol>
         <script>
             var redditPosts = <%- JSON.stringify(redditPosts) %>;

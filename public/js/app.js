@@ -1,7 +1,12 @@
 angular.module("TestApp", []);
 
-angular.module("TestApp").controller("MainController", ctrlFunc);
+angular.module("TestApp").controller("MainController", mainFunc);
+angular.module("TestApp").controller("PostController", postFunc);
 
-function ctrlFunc() {
+function mainFunc() {
+    this.timespan = timespan;
+}
+
+function postFunc() {
     this.redditPosts = redditPosts;
 }
