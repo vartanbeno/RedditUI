@@ -15,7 +15,7 @@
         <ol>
             <li class="listitem" ng-repeat="post in vm.redditPosts.fulfillmentValue">+{{post.ups}}. <a href="https://old.reddit.com{{post.permalink}}?sort=top" target="_blank">{{post.title}}</a>
             <br/>
-            Posted by {{post.author}}.</li>
+            Posted by {{post.author}} on {{ post.created_utc * 1000 | date: 'medium' }}.</li>
         </ol>
         <script>
             var redditPosts = <%- JSON.stringify(redditPosts) %>;
