@@ -1,13 +1,13 @@
 <html ng-app="TestApp">
     <head>
-        <link href="/assets/style.css" type="text/css" rel="stylesheet" />
+        <link href="/assets/index.css" type="text/css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
         <title>snoowrap</title>
     </head>
     <body ng-controller="MainController as vm">
         <div id="container">
             <div id="form">
-                <p class="title">Condunct a search...</p>
+                <p class="title">Conduct a search...</p>
                 <form method="GET" action="/results">
                     <div>
                         <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="subreddit" />
