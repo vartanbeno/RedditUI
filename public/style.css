@@ -66,6 +66,12 @@ div#form input[type='text'], div#form input[type='number'] {
     border-radius: 3px;
 }
 
+.submitButton:hover {
+    cursor: pointer;
+    background: #4ca050;
+    transition-duration: 0.3s;
+}
+
 .dropdown select {
     padding: 5px 8px;
     border: none;
