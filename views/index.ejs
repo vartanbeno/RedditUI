@@ -10,18 +10,25 @@
                 <p class="title">Conduct a search...</p>
                 <form method="GET" action="/results">
                     <div>
-                        <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="subreddit" />
+                        <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="subreddit" required/>
+                    </div>
+
+                    <div>
+                        <span ng-repeat="sort in vm.sortOptions">
+                            <input type="radio" name="sort" value="{{sort}}" id="{{sort}}" required>
+                            <label for="{{sort}}">{{sort}}</label>
+                        </span>
                     </div>
                     
-                    <div class="dropdown">
-                        <select id="time" name="time">
+                    <div class="timespan" id="timespan">
+                        <select id="time" name="time" required>
                             <option selected disabled>timespan</option>
                             <option ng-repeat="time in vm.timespan" value="{{time}}">{{time}}</option>
                         </select>
                     </div>
         
                     <div>
-                        <input type="number" name="number" min = "1" max="1000" value="<%= qs.number %>" placeholder="#posts" />
+                        <input type="number" name="number" min = "1" max="1000" value="<%= qs.number %>" placeholder="#posts" required/>
                     </div>
                     
                     <div>
@@ -30,9 +37,11 @@
                 </form>
             </div>
             <script>
+                var sortOptions = <%- JSON.stringify(sortOptions) %>;
                 var timespan = <%- JSON.stringify(timespan) %>;
             </script>
             <script src="/assets/js/app.js"></script>
+            <script src="/assets/js/index.js"></script>
         </div>
     </body>
 </html>

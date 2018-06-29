@@ -3,6 +3,7 @@ var app = express();
 var snoowrap = require("snoowrap");
 var bodyParser = require("body-parser");
 
+const sortOptions = ['hot', 'new', 'rising', 'controversial', 'top']
 const timespan = ['all', 'year', 'month', 'week', 'day', 'hour'];
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -20,33 +21,34 @@ app.set("view engine", "ejs");
 app.use("/assets", express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
-    res.render("index", {qs: req.query, timespan: timespan});
+    res.render("index", {qs: req.query, sortOptions: sortOptions, timespan: timespan});
 })
 
-app.get("/hot/:subreddit", function(req, res) {
-    let hotPosts = reddit.getSubreddit(req.params.subreddit).getHot({limit: 10});
-    hotPosts.then(hot => {
+app.get("/results", function(req, res) {
+    let posts;
+    if (req.query.sort == "hot") {
+        posts = reddit.getSubreddit(req.query.subreddit).getHot({limit: parseInt(req.query.number)});
+        posts.then(hot => {
             hot.forEach((post, index, posts) => {
                 if (post.stickied) {
                     posts[index].title = "[STICKIED] - " + post.title;
                 }
             })
         })
-        .then(() => {
-            res.render("posts", {redditPosts: hotPosts});
-        })
-})
+    }
+    else if (req.query.sort == "new") {
+        posts = reddit.getSubreddit(req.query.subreddit).getNew({limit: parseInt(req.query.number)});
+    }
+    else if (req.query.sort == "rising") {
+        posts = reddit.getSubreddit(req.query.subreddit).getRising({limit: parseInt(req.query.number)});
+    }
+    else if (req.query.sort == "controversial") {
+        posts = reddit.getSubreddit(req.query.subreddit).getControversial({limit: parseInt(req.query.number)});
+    }
+    else if (req.query.sort == "top") {
+        posts = reddit.getSubreddit(req.query.subreddit).getTop({limit: parseInt(req.query.number), time: req.query.time});
+    }
 
-app.get("/top/:subreddit/:time?", function(req, res) {
-    let time = req.params.time || "all";
-    let topPosts = reddit.getSubreddit(req.params.subreddit).getTop({limit: 10, time: time});
-    topPosts.then(() => {
-            res.render("posts", {redditPosts: topPosts});
-        })
-})
-
-app.get("/results", function(req, res) {
-    let posts = reddit.getSubreddit(req.query.subreddit).getTop({limit: parseInt(req.query.number), time: req.query.time});
     posts.then(() => {
         res.render("posts", {qs: req.query, redditPosts: posts})
     })

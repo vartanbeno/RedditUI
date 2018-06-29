@@ -31,7 +31,7 @@ div#form {
     bottom: 0;
 }
 
-div#form input, .submitButton, select {
+div#form input[type='text'], div#form input[type='number'], .submitButton, select {
     font-family: "Roboto", sans-serif;
     height: 40px;
     width: 300px;
@@ -40,11 +40,14 @@ div#form input, .submitButton, select {
 
 div#form input[type='text'], div#form input[type='number'] {
     padding: 0px 8px;
-    margin: 20px 0px;
     background: #f2f2f2;
     outline: none;
     border: 0;
     border-radius: 3px;
+}
+
+div#form div {
+    margin: 15px 0px;
 }
 
 .submitButton {
@@ -64,7 +67,7 @@ div#form input[type='text'], div#form input[type='number'] {
     transition-duration: 0.3s;
 }
 
-.dropdown select {
+.timespan select {
     padding: 0px 8px;
     border: none;
     box-shadow: none;
@@ -72,7 +75,7 @@ div#form input[type='text'], div#form input[type='number'] {
     -webkit-appearance: none;
 }
 
-div#container, div#form input[type='text']:focus, div#form input[type='number']:focus, .dropdown select:focus {
+div#container, div#form input[type='text']:focus, div#form input[type='number']:focus, .timespan select:focus {
     outline: none;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
