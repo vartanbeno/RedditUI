@@ -2,13 +2,14 @@
     <head>
         <link href="/assets/index.css" type="text/css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <title>snoowrap</title>
     </head>
     <body ng-controller="MainController as vm">
         <div id="container">
             <div id="form">
                 <p class="title">Conduct a search...</p>
-                <form method="GET" action="/results">
+                <form method="GET" action="/results" target="_blank">
                     <div>
                         <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="subreddit" required/>
                     </div>
@@ -20,11 +21,18 @@
                         </span>
                     </div>
                     
-                    <div class="timespan" id="timespan">
+                    <div class="timespan" id="timespan" hidden>
                         <select id="time" name="time" required>
-                            <option selected disabled>timespan</option>
+                            <option selected disabled value="">timespan</option>
                             <option ng-repeat="time in vm.timespan" value="{{time}}">{{time}}</option>
                         </select>
+                    </div>
+
+                    <div class="showstickied" id="showstickied" hidden>
+                            <input type="radio" name="sticky" value="yes" id="yes" required>
+                            <label for="yes">show stickied</label>
+                            <input type="radio" name="sticky" value="no" id="no" required>
+                            <label for="no">don't show stickied</label>
                     </div>
         
                     <div>

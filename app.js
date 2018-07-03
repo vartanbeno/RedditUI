@@ -28,13 +28,20 @@ app.get("/results", function(req, res) {
     let posts;
     if (req.query.sort == "hot") {
         posts = reddit.getSubreddit(req.query.subreddit).getHot({limit: parseInt(req.query.number)});
-        posts.then(hot => {
-            hot.forEach((post, index, posts) => {
-                if (post.stickied) {
-                    posts[index].title = "[STICKIED] - " + post.title;
-                }
+        if (req.query.sticky == "yes") {
+            posts.then(hot => {
+                hot.forEach((post, index, posts) => {
+                    if (post.stickied) {
+                        posts[index].title = "[STICKIED] - " + post.title;
+                    }
+                })
             })
-        })
+        }
+        else {
+            posts = posts.filter(function(post) {
+                return post.stickied != true;
+            })
+        }
     }
     else if (req.query.sort == "new") {
         posts = reddit.getSubreddit(req.query.subreddit).getNew({limit: parseInt(req.query.number)});
@@ -48,7 +55,7 @@ app.get("/results", function(req, res) {
     else if (req.query.sort == "top") {
         posts = reddit.getSubreddit(req.query.subreddit).getTop({limit: parseInt(req.query.number), time: req.query.time});
     }
-
+    
     posts.then(() => {
         res.render("posts", {qs: req.query, redditPosts: posts})
     })
