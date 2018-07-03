@@ -9,9 +9,10 @@
         <div id="container">
             <div id="form">
                 <p class="title">Conduct a search...</p>
+				<p>You can search for multiple subreddits by separating them with a comma. Or type in "all" to retrieve a stream of every post.</p>
                 <form method="GET" action="/results" target="_blank">
                     <div>
-                        <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="enter a subreddit" required/>
+                        <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="enter subreddit(s)" required/>
                     </div>
 
                     <div>

@@ -26,6 +26,8 @@ app.get("/", function(req, res) {
 
 app.get("/results", function(req, res) {
     let posts;
+	req.query.subreddit = req.query.subreddit.replace(/\s/g, "");
+	req.query.subreddit = req.query.subreddit.replace(/,/g, "+");
     if (req.query.sort == "hot") {
         posts = reddit.getSubreddit(req.query.subreddit).getHot({limit: parseInt(req.query.number)});
         if (req.query.sticky == "yes") {
@@ -56,10 +58,10 @@ app.get("/results", function(req, res) {
         posts = reddit.getSubreddit(req.query.subreddit).getTop({limit: parseInt(req.query.number), time: req.query.time});
     }
 	
-	if (req.query.subreddit == "all") {
+	if (req.query.subreddit == "all" || req.query.subreddit.split("+").length > 1) {
 		posts.then(hot => {
 			hot.forEach(post => {
-				post.title = post.title + " - /r/" + post.subreddit.display_name;
+				post.title = "/r/" + post.subreddit.display_name + " - " + post.title;
 			})
 		})
 	}
