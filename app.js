@@ -25,7 +25,6 @@ app.get("/", function(req, res) {
 })
 
 app.get("/results", function(req, res) {
-	
     let posts;
     if (req.query.sort == "hot") {
         posts = reddit.getSubreddit(req.query.subreddit).getHot({limit: parseInt(req.query.number)});
