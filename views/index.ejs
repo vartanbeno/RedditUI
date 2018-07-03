@@ -11,7 +11,7 @@
                 <p class="title">Conduct a search...</p>
                 <form method="GET" action="/results" target="_blank">
                     <div>
-                        <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="subreddit" required/>
+                        <input type="text" id="subreddit" name="subreddit" value="<%= qs.subreddit %>" placeholder="enter a subreddit" required/>
                     </div>
 
                     <div>
@@ -23,7 +23,7 @@
                     
                     <div class="timespan" id="timespan" hidden>
                         <select id="time" name="time" required>
-                            <option selected disabled value="">timespan</option>
+                            <option selected disabled value="">select a timespan</option>
                             <option ng-repeat="time in vm.timespan" value="{{time}}">{{time}}</option>
                         </select>
                     </div>
@@ -36,7 +36,7 @@
                     </div>
         
                     <div>
-                        <input type="number" name="number" min = "1" max="1000" value="<%= qs.number %>" placeholder="#posts" required/>
+                        <input type="number" name="number" min = "1" max="1000" value="<%= qs.number %>" placeholder="enter the number of posts desired" required/>
                     </div>
                     
                     <div>
