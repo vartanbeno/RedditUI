@@ -5,12 +5,6 @@
         <title>snoowrap</title>
     </head>
     <body ng-controller="PostController as vm">
-        <p id="intro">You are currently viewing the top /r/<%= qs.subreddit %> posts
-            <% if (qs.time == "all") { %>
-                of all time.
-            <% } else { %>
-                from the past <%= qs.time %>.
-            <% } %>
         </p>
         <ol>
             <li class="listitem" ng-repeat="post in vm.redditPosts.fulfillmentValue">+{{post.ups}}. <a href="https://old.reddit.com{{post.permalink}}?sort=top" target="_blank">{{post.title}}</a>
