@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 body {
-    background-color: #65be47;
+    background-color: #616161;
     font-family: "Roboto", sans-serif;
 }
 
@@ -18,7 +18,7 @@ div#container {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: white;
+    background-color: #BDBDBD;
     padding: 30px 45px 45px;
     text-align: center;
     border-radius: 15px;
@@ -53,7 +53,7 @@ div#form div {
 .submitButton {
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: #616161;
     color: #FFFFFF;
     padding: 15px;
     border: 0;
@@ -63,7 +63,7 @@ div#form div {
 
 .submitButton:hover {
     cursor: pointer;
-    background: #4ca050;
+    background: #424242;
     transition-duration: 0.3s;
 }
 
