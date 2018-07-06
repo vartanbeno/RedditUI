@@ -40,9 +40,7 @@ app.get("/results", function(req, res) {
             })
         }
         else {
-            posts = posts.filter(function(post) {
-                return post.stickied != true;
-            })
+            posts = posts.filter(post => !post.stickied)
         }
     }
     else if (req.query.sort == "new") {
